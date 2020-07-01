@@ -1,0 +1,54 @@
+{% load static %}
+<!doctype html>
+<html lang="pt-br">
+<head>
+    <title>CoopVirtual - Login</title>
+		<meta charset="utf-8" />
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+</head>
+
+<body>
+
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+
+    <!-- Icon -->
+    <div class="fadeIn first">
+      <img src="{% static 'icon.png' %}" id="icon" alt="User Icon" />
+    </div>
+
+
+    <!-- Login Form -->
+
+    <form method="POST" action="submit">
+        {% csrf_token %}
+      <input type="text" id="username" class="fadeIn second" name="username" placeholder="Usuario">
+      <input type="password" id="password" class="fadeIn third" name="password" placeholder="Senha">
+      <input type="submit" class="fadeIn fourth" value="ENTRAR">
+
+    </form>
+      <div>
+          {% for message in messages %}
+            <div>
+                 <strong>Error! {{message}}</strong>
+            </div>
+          {% endfor %}
+      </div>
+
+    <!-- Remind Passowrd -->
+    <div id="formFooter">
+      <a class="underlineHover" href="#">Esqueceu sua senha?</a>
+    </div>
+      <div id="formFooter">
+      <a class="underlineHover" href="/cadastro/">Não tem um cadastro?</a>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>

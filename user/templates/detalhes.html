@@ -1,0 +1,124 @@
+{% extends "model-page.html" %}
+{% block style %}
+<style>
+.gallery-wrap .img-big-wrap img {
+    height: 450px;
+    width: auto;
+    display: inline-block;
+    cursor: zoom-in;
+}
+
+
+.gallery-wrap .img-small-wrap .item-gallery {
+    width: 60px;
+    height: 60px;
+    border: 1px solid #ddd;
+    margin: 7px 2px;
+    display: inline-block;
+    overflow: hidden;
+}
+
+.gallery-wrap .img-small-wrap {
+    text-align: center;
+}
+.gallery-wrap .img-small-wrap img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+    cursor: zoom-in;
+}
+</style>
+{% endblock%}
+    {% block content %}
+
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="container">
+
+<hr>
+
+
+<div class="card">
+	<div class="row">
+		<aside class="col-sm-5 border-right">
+<article class="gallery-wrap">
+<div class="img-big-wrap">
+  <div> <a href="#"><img width="300" style="width: 100%" src="{{ ofertas.photo.url }}"></a></div>
+</div> <!-- slider-product.// -->
+
+</article> <!-- gallery-wrap .end// -->
+		</aside>
+		<aside class="col-sm-7">
+<article class="card-body p-5">
+	<h3 class="title mb-3">{{ofertas.produto}}</h3>
+
+<p class="price-detail-wrap">
+	<span class="price h3 text-warning" >
+		<span class="currency">R$ </span><span class="num">{{ofertas.valor}}</span>
+	</span>
+
+</p> <!-- price-detail-wrap .// -->
+<dl class="item-property">
+  <dt>Descrição</dt>
+  <dd><p>{{ofertas.description}} </p></dd>
+</dl>
+<dl class="param param-feature">
+  <dt>Endereço</dt>
+  <dd>{{ofertas.endereco}}</dd>
+</dl>  <!-- item-property-hor .// -->
+<dl class="param param-feature">
+  <dt>Telefone</dt>
+  <dd>{{ofertas.phone}}</dd>
+</dl>  <!-- item-property-hor .// -->
+<dl class="param param-feature">
+  <dt>Quantidade de Quartos</dt>
+  <dd>{{ofertas.qtd_quartos}}</dd>
+</dl>  <!-- item-property-hor .// -->
+
+<hr>
+	<div class="col-sm-7">
+        <dl class="item-property">
+  <dt></dt>
+  <dd> Por {{ofertas.usuario}} em {{ofertas.begin_date}}</dd>
+</dl>
+
+		</div> <!-- col.// -->
+
+	</div> <!-- row.// -->
+	<hr>
+	<a href="pdf" class="btn btn-lg btn-primary text-uppercase">GERAR PDF DA OFERTA</a>
+        <hr>
+        {% csrf_token %}
+		<form method="POST" action="email">
+        {% csrf_token %}
+      <input type="text" id="mensagem" class="form-control" name="mensagem" placeholder="Envie uma mensagem ao proprietario do imóvel">
+            <small id="emailHelp" class="form-text text-muted">*Se identifique </small>
+            <small id="emailHelp" class="form-text text-muted">*Deixe um numero para contato </small>
+            <div>
+      <input type="submit" class="btn btn-lg btn-primary text-uppercase" value="ENVIAR">
+            </div>
+    </form>
+        </div>
+    {% if request.user == ofertas.usuario %}
+    <hr>
+    <a href="/cadastro_oferta/?id={{ofertas.id}}">
+    <button type="button" class="btn btn-primary">EDITAR</button>
+        </a>
+    <a href="/delete/{{ofertas.id}}">
+    <button type="button" class="btn btn-danger">REMOVER</button>
+        </a>
+    {% endif %}
+</div>
+<!--container.//-->
+
+
+<br><br><br>
+
+
+
+</div>
+<br><br><br>
+</article>
+
+    {% endblock %}

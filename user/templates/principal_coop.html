@@ -1,0 +1,52 @@
+
+{% extends "model-page.html" %}
+
+ {% block content %}
+     <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet" id="bootstrap-css">
+            <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+            <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+  <div class="container">
+      {% for p in ofertas %}
+
+
+
+
+
+
+
+
+    <div class="row">
+
+        <div class="col-sm-6">
+          <div class="thumbnail" style="padding: 0">
+            <div style="padding:4px">
+                <a class="polaroid">
+                    <a href="/detalhes/{{p.id}}">
+              <img width="300" height="300" style="width: 100%" src="{{ p.photo.url }}">
+                </a>
+                    </div>
+            </div>
+            <div class="caption">
+              <h2>{{p.produto}}</h2>
+              <p>{{p.description}}</p>
+              <p><i class="icon icon-map-marker"></i> {{p.endereco}}</p>
+            </div>
+            <div class="modal-footer" style="text-align: left">
+              <div class="progress progress-striped active" style="background: #ddd">
+                <div class="bar" style="width: {{p.conservacao}}%;"></div>
+              </div>
+              <div class="row-fluid">
+                <div class="span4"><b>{{p.conservacao}}%</b><br/><small>CONSERVAÇÃO</small></div>
+                <div class="span4"><b>R${{p.valor}}</b><br/><small>VALOR</small></div>
+                <div class="span4"><b>{{p.qtd_quartos}}</b><br/><small>QTD QUARTOS</small></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <br><br><br><br><br>
+        {% endfor %}
+    </div>
+  </div>
+
+{% endblock %}

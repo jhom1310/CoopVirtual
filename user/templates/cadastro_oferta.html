@@ -1,0 +1,88 @@
+{% extends "model-page.html" %}
+{% load static %}
+
+
+{% block content %}
+
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="container contact">
+
+    <div> <H1>
+		{% if oferta %}
+			EDITAR IMÓVEL
+		{% else %}
+			CADASTRAR IMÓVEL
+		{% endif %}
+	</H1></div>
+<form enctype="multipart/form-data" action="submit", method="POST"> {% csrf_token %}
+	<div class="row">
+		<input  class="form-control" name="oferta-id" value="{{oferta.id}}" type="hidden">
+		<div class="col-md-9">
+			<div class="contact-form">
+				<div class="form-group">
+				  <label class="control-label col-sm-2" for="produto">Titulo</label>
+
+					<input type="text" class="form-control" id="produto" placeholder="Informe um titulo" name="produto" value="{{oferta.produto}}">
+
+				</div>
+
+				<div class="form-group">
+				  <label class="control-label col-sm-2" for="endereco">Endereço:</label>
+
+					<input type="text" class="form-control" id="endereco" placeholder="Informe um endereço" name="endereco" value="{{oferta.endereco}}">
+
+				</div>
+				<div class="form-group">
+				  <label class="control-label col-sm-2" for="valor">Valor</label>
+
+					<input type="txt" class="form-control" id="valor" placeholder="Informe um valor" name="valor" value="{{oferta.valor}}">
+
+				</div>
+                <div class="form-group">
+				  <label class="control-label col-sm-2" for="qtd_quartos">Qtd. Quartos</label>
+
+					<input type="text" class="form-control" id="qtd_quartos" placeholder="Informe a quantidade de quartos" name="qtd_quartos" value="{{oferta.qtd_quartos}}">
+
+				</div>
+                <div class="form-group">
+				  <label class="control-label col-sm-2" for="phone">Telefone</label>
+
+					<input type="text" class="form-control" id="phone" placeholder="Informe um telefone para contato" name="phone" value="{{oferta.phone}}">
+
+				</div>
+                <div class="form-group">
+				  <label class="control-label col-sm-2" for="conservacao">Conservação</label>
+
+					<input type="text" class="form-control" id="conservacao" placeholder="De 0 a 100 informe o nivel de conservação do imóvel" name="conservacao" value="{{oferta.conservacao}}">
+
+				</div>
+				<div class="form-group">
+				  <label class="control-label col-sm-2" for="description" >Descrição:</label>
+
+					<textarea class="form-control" rows="5" name="description">{{oferta.description}}</textarea>
+
+				</div>
+                <div class="form-group">
+				  <label class="control-label col-sm-2" for="photo">Foto:</label>
+						<a href="/media/{{oferta.photo}}" target="_blank">Foto atual</a>
+					<input type="file" class="form-control-file border" name="photo" accept="image/*">
+
+				</div>
+				<div class="form-group">
+
+					<button type="submit" class="btn btn-default">
+						{% if oferta %}
+							EDITAR
+						{% else %}
+							CADASTRAR
+						{% endif %}
+					</button>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</form>
+{% endblock %}
